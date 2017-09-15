@@ -1,0 +1,10 @@
+{
+  "name": "closure",
+  "version": "0.0.1",
+  "repo": "MobiusHorizons/closure_module",
+  "description": "simple callback/closure interface for C/CModules",
+  "keywords": ["closure", "mpp", "callback", "function"],
+  "license": "MIT",
+  "src": ["closure.module.c", "closure.c", "closure.h"]
+}
+
