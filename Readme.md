@@ -3,6 +3,11 @@
 Closure is a simple wrapper for stateful callbacks in `C`.
 It has a simple API
 
+Can be installed using [`clib`](https://github.com/clibs/clib)
+```bash
+clib install mobiushorizons/closure_module
+```
+
 ## C Module API (for use with [`mpp` the modular C preprossor](https://github.com/MobiusHorizons/modularC) )
 
 ### `new`
