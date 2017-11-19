@@ -1,9 +1,9 @@
-#Closure
+# Closure
 
 Closure is a simple wrapper for stateful callbacks in `C`.
 It has a simple API
 
-## C Module API
+## C Module API (`cbuild`)[https://github.com/MobiusHorizons/cbuild#syntax]
 
 ### `new`
 ```c
@@ -23,7 +23,7 @@ and `arg` is the `void *`argument passed to `closure.call`
 void * call(closure_t c, void * arg);
 ```
 
-calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument. 
+calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
 
 
 ## C API
@@ -46,11 +46,11 @@ and `arg` is the `void *`argument passed to `closure_call`
 void * closure_call(closure_t c, void * arg);
 ```
 
-calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument. 
+calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
 
 ## Examples
 
-If you are including this with (`mpp` the modular C preprossor)[https://github.com/MobiusHorizons/modularC], use the
+If you are including this with (`cbuild` the C module builder)[https://github.com/MobiusHorizons/cbuild], use the
 first syntax, otherwise, the generated header and c files are included to work in any normal build system.
 
 ### Modular Example
@@ -89,7 +89,7 @@ int main(){
   printf("Our callback was called %d times\n", state.count);
 }
 ```
-compile with `mpp -m test-closure.module.c`, which will produce a `test-closure` binary in the same directory.
+compile with `cbuild -m test-closure.module.c`, which will produce a `test-closure` binary in the same directory.
 
 ### Standard C example
 ``` c
@@ -106,7 +106,7 @@ void * callback(void * ctx, void * arg){
   struct state * state = (struct state *)ctx;
   state->count++; // increment invocation counter
 
-  printf("callback has been called %d times, Message was '%s'\n", state->count, (char*) arg); 
+  printf("callback has been called %d times, Message was '%s'\n", state->count, (char*) arg);
   return NULL;
 }
 
