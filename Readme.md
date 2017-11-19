@@ -1,31 +1,13 @@
 # Closure
 
-Closure is a simple wrapper for stateful callbacks in `C`.
+Closure is a simple interface for stateful callbacks in `C`.
+
+It can be installed using [`clib`](https://github.com/clibs/clib)
+```bash
+clib install mobiushorizons/closure_module
+```
+
 It has a simple API
-
-## C Module API (`cbuild`)[https://github.com/MobiusHorizons/cbuild#syntax]
-
-### `new`
-```c
-closure.t closure.new(void * (*fn)(void * ctx, void * arg), void * ctx);
-```
-
-This function creates a `closure.t` which can be called with `closure.call`;
-the funciton pointer passed to `closure.new` is of the form
-```c
-void * callback(void * ctx, void * arg);
-```
-wherer `ctx` refers to the context argument passed to `closure.new`, which will be the same across calls,
-and `arg` is the `void *`argument passed to `closure.call`
-
-### `call`
-```c
-void * call(closure_t c, void * arg);
-```
-
-calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
-
-
 ## C API
 
 ### `closure_new`
@@ -33,12 +15,13 @@ calls the closure passing it both the `ctx` context argument set up on initializ
 closure_t closure_new(void * (*fn)(void * ctx, void * arg), void * ctx);
 ```
 
-This function creates a `closure_t` which can be called with `closure_call`;
-the funciton pointer passed to `closure_new` is of the form
+This function creates a `closure_t` which can be called with `closure_call`
+
+The function pointer passed to `closure_new` is of the form
 ```c
 void * callback(void * ctx, void * arg);
 ```
-wherer `ctx` refers to the context argument passed to `closure_new`, which will be the same across calls,
+where `ctx` refers to the context argument passed to `closure_new`, which will be the same across calls,
 and `arg` is the `void *`argument passed to `closure_call`
 
 ### `closure_call`
@@ -46,11 +29,36 @@ and `arg` is the `void *`argument passed to `closure_call`
 void * closure_call(closure_t c, void * arg);
 ```
 
-calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
+Calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
+
+
+## C Module API (for use with [`cbuild` the C module builder](https://github.com/MobiusHorizons/cbuild) )
+
+### `new`
+```c
+closure.t closure.new(void * (*fn)(void * ctx, void * arg), void * ctx);
+```
+
+This function creates a `closure.t` which can be called with `closure.call`
+
+The function pointer passed to `closure.new` is of the form
+```c
+void * callback(void * ctx, void * arg);
+```
+where `ctx` refers to the context argument passed to `closure.new`, which will be the same across calls,
+and `arg` is the `void *`argument passed to `closure.call`
+
+### `call`
+```c
+void * call(closure_t c, void * arg);
+```
+
+Calls the closure passing it both the `ctx` context argument set up on initialization, and the `arg` argument.
+
 
 ## Examples
 
-If you are including this with (`cbuild` the C module builder)[https://github.com/MobiusHorizons/cbuild], use the
+If you are including this with [`cbuild` the modular C preprocessor](https://github.com/MobiusHorizons/cbuild), use the
 first syntax, otherwise, the generated header and c files are included to work in any normal build system.
 
 ### Modular Example
@@ -89,7 +97,7 @@ int main(){
   printf("Our callback was called %d times\n", state.count);
 }
 ```
-compile with `cbuild -m test-closure.module.c`, which will produce a `test-closure` binary in the same directory.
+compile with `mpp -m test-closure.module.c`, which will produce a `test-closure` binary in the same directory.
 
 ### Standard C example
 ``` c
