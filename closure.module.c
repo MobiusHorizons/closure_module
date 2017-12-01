@@ -2,8 +2,7 @@ export
 typedef struct {
   void * ctx;
   void * (*fn)(void * ctx, void * arg);
-} closure_t;
-export typedef closure_t t;
+} closure_t as t;
 
 export
 closure_t new(void * (*fn)(void*, void*), void * ctx){
