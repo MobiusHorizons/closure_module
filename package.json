@@ -1,6 +1,6 @@
 {
   "name": "closure",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repo": "MobiusHorizons/closure_module",
   "description": "simple callback/closure interface for C/CModules",
   "keywords": ["closure", "mpp", "callback", "function"],
